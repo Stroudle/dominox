@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// stores all needed resources for conveninet access.
+/// Stores all needed resources for convenient access.
 /// </summary>
 public class ResourceManager : MonoBehaviour
 {
-    public SO_Symbol diamond,circle,square,triangle;
-    public GameObject symbol;
-
     public static ResourceManager Instance;
+    public GameboardManager boardManager { get; private set; }
+
+    [SerializeField] private SO_Symbol diamond,circle,square,triangle;
+    [SerializeField] private GameObject symbol;
 
     private void Awake()
     {
@@ -20,6 +19,9 @@ public class ResourceManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+
+        boardManager = GameObject.FindWithTag("GameboardManager").GetComponent<GameboardManager>();
     }
 
     public SO_Symbol GetSymbolData(E_Symbol symbol)
