@@ -92,10 +92,8 @@ public class GameboardManager : MonoBehaviour
             {
                 if(SymbolsMatch(colliders))
                 {
-                    //OnPointScore();
+                    OnPointScore();
                     removeList.Add(pos);
-
-                    Debug.Log("point score");
                 }
             }   
         }
