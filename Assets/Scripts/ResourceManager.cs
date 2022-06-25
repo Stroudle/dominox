@@ -8,7 +8,7 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance;
     public GameboardManager boardManager { get; private set; }
 
-    [SerializeField] private SO_Symbol diamond,circle,square,triangle;
+    [SerializeField] private SO_Symbol circleOpen, circle;
     [SerializeField] private GameObject playerTile, tile;
 
     private void Awake()
@@ -28,14 +28,10 @@ public class ResourceManager : MonoBehaviour
     {
         switch(symbol)
         {
-            case E_Symbol.diamond:
-                return diamond;
+            case E_Symbol.circleOpen:
+                return circleOpen;
             case E_Symbol.circle:
                 return circle;
-            case E_Symbol.square:
-                return square;
-            case E_Symbol.triangle:
-                return triangle;
         }
         return null;
     }

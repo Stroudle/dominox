@@ -1,7 +1,5 @@
 public enum E_Symbol
 {
-    diamond,
-    circle,
-    square,
-    triangle
+    circleOpen,
+    circle
 };
