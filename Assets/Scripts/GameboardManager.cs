@@ -7,8 +7,12 @@ using UnityEngine.Tilemaps;
 public class GameboardManager : MonoBehaviour
 {
     public Tilemap gameboard { get; private set; }
+
     private Dictionary<Vector3Int, bool> tileActive = new();
     private List<Vector3> serchPoints = new();
+
+    private const float SEARCHRADIUS = 0.5f;
+    private const int MINPOINTSTOSCORE = 4;
 
     private void Start()
     {
@@ -16,7 +20,7 @@ public class GameboardManager : MonoBehaviour
         gameboard.CompressBounds();
         AddTiles();
 
-        PlayerDrag.OnPlaceTile += PlaceTileHandler;
+        PlayerDrag.OnPlaceTile += PlaceTileEventHandler;
     }
 
     /// <summary>
@@ -31,10 +35,6 @@ public class GameboardManager : MonoBehaviour
                 tileActive.Add(pos, false);
             }
         }
-    }
-    private bool IsOnBoard(Vector3Int pos)
-    {
-        return gameboard.HasTile(pos);
     }
 
     public bool CanPlaceTile(Vector3 pos)
@@ -53,47 +53,59 @@ public class GameboardManager : MonoBehaviour
         return false;
     }
 
+    private bool IsOnBoard(Vector3Int pos)
+    {
+        return gameboard.HasTile(pos);
+    }
+
     public Vector3 SnapToGrid(Vector3 pos)
     {
         return gameboard.GetCellCenterWorld(gameboard.WorldToCell(pos));
     }
 
-    private void PlaceTileHandler(Vector3 pos)
+    private void PlaceTileEventHandler(Vector3 pos)
     {
         serchPoints.Add(gameboard.WorldToCell(pos));
-
         SearchPoints();
     }
 
     private void SearchPoints()
     {
+        List<Vector3> removeList = new();
         foreach(Vector3 pos in serchPoints)
         {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(pos.x, pos.y), SEARCHRADIUS);
 
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(pos.x, pos.y), 0.5f);
-
-            if(colliders.Length < 4)
+            if(colliders.Length >= MINPOINTSTOSCORE)
             {
-                break;
-            }
-
-            E_Symbol[] symbols = new E_Symbol[4];
-            for(int i = 0; i < 4; i++)
-            {
-                symbols[i] = colliders[i].gameObject.GetComponent<Symbol>().symbol;
-
-                if(i > 0)
+                if(SymbolsMatch(colliders))
                 {
-                    if(symbols[i] != symbols[i - 1])
-                    {
-                        break;
-                    }
+                    Debug.Log("Score Point");
+                    removeList.Add(pos);
                 }
             }
-
-            Debug.Log("Score Point");
-            serchPoints.Remove(pos);
-            return;
         }
+        serchPoints.RemoveAll(i => removeList.Contains(i));
     }
+
+    public bool SymbolsMatch(Collider2D[] colliders)
+    {
+        E_Symbol[] symbols = new E_Symbol[colliders.Length];
+        for(int i = 0; i < symbols.Length; i++)
+        {
+            symbols[i] = colliders[i].gameObject.GetComponent<Symbol>().symbol;
+
+            if(i > 0)
+            {
+                if(symbols[i] != symbols[i - 1])
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
 }
