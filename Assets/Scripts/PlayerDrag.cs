@@ -1,17 +1,19 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Drag : MonoBehaviour
+public class PlayerDrag : MonoBehaviour
 {
     private bool isDrag;
     private Vector3 startPos,dragStartMousePos, dragStartPos;
     private GameboardManager boardManager;
 
+    public static UnityAction<Vector3> OnPlaceTile;
+
     private void Awake()
     {
         startPos = transform.position;
         boardManager = ResourceManager.Instance.boardManager;
-        Debug.Log(boardManager);
     }
 
     private void OnMouseDown()
@@ -40,7 +42,7 @@ public class Drag : MonoBehaviour
 
         if(boardManager.CanPlaceTile(transform.position))
         {
-            SnapToTile();
+            PlaceTile();
         }
         else
         {
@@ -48,11 +50,13 @@ public class Drag : MonoBehaviour
         }
     }
 
-    private void SnapToTile()
+    private void PlaceTile()
     {
-        transform.position = boardManager.gameboard.GetCellCenterWorld(boardManager.gameboard.WorldToCell(transform.position));
+        transform.position = boardManager.SnapToGrid(transform.position);
+        Destroy(GetComponent<BoxCollider2D>());
+
+        OnPlaceTile(transform.position);
 
         Destroy(this);
-        Destroy(GetComponent<BoxCollider2D>());
     }
 }
