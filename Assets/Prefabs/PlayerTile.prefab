@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 924945490283041505, guid: d2ac66e655f830a49829dc43449eec63, type: 3}
       propertyPath: m_Name
-      value: PlayerPiece
+      value: PlayerTile
       objectReference: {fileID: 0}
     - target: {fileID: 2360216019460593487, guid: d2ac66e655f830a49829dc43449eec63, type: 3}
       propertyPath: m_RootOrder
@@ -98,5 +98,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df252a98ff9dede489431a39c3a74ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7554532952208675864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2530110400283714919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e02719b81dae147b0d7c300d86b2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

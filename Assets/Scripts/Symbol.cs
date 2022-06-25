@@ -14,7 +14,7 @@ public class Symbol : MonoBehaviour
 
     private void Start()
     {
-        SO_Symbol symbolData = ResourceManager.Instance.GetSymbolData((E_Symbol)Random.Range(0, 4));
+        SO_Symbol symbolData = ResourceManager.Instance.GetSymbolData((E_Symbol)Random.Range(0, 2));
         symbol = symbolData.symbol;
         spRenderer.sprite = symbolData.sprite;
         spRenderer.color = symbolData.color;

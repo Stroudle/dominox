@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class PlayerDrag : MonoBehaviour
 {
-    private bool isDrag;
+    public bool isDrag { get; private set; }
     private Vector3 startPos,dragStartMousePos, dragStartPos;
     private GameboardManager boardManager;
 

@@ -83,7 +83,7 @@ public class GameboardManager : MonoBehaviour
                     Debug.Log("Score Point");
                     removeList.Add(pos);
                 }
-            }
+            }   
         }
         serchPoints.RemoveAll(i => removeList.Contains(i));
     }
@@ -103,9 +103,6 @@ public class GameboardManager : MonoBehaviour
                 }
             }
         }
-
         return true;
     }
-
-
 }

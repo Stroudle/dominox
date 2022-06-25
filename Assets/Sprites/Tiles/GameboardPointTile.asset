@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Tile
+  m_Name: GameboardPointTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 7482667652216324306, guid: 63f5b46c1e2bc59438d1df772addfa21, type: 3}
-  m_Color: {r: 0.9811321, g: 0.80989677, b: 0.95292866, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7ff96df78556fd44e89625ff74851d8d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_Transform:
     e00: 1
     e01: 0

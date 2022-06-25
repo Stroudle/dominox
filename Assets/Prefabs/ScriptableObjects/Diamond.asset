@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Diamond
   m_EditorClassIdentifier: Assembly-CSharp::So_symbol
   symbol: 0
-  sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  color: {r: 0.09411764, g: 0.42485556, b: 0.8666667, a: 1}
+  sprite: {fileID: 21300000, guid: f3b2b5e71ce4cfc48b92ac5af8f87bfa, type: 3}
+  color: {r: 0.3529412, g: 0.5411765, b: 0.454902, a: 1}
