@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Events;
 
 
 public class GameboardManager : MonoBehaviour
@@ -14,13 +14,15 @@ public class GameboardManager : MonoBehaviour
     private const float SEARCHRADIUS = 0.5f;
     private const int MINPOINTSTOSCORE = 4;
 
+    public static UnityAction OnPointScore;
+
+    [SerializeField] private LayerMask overlapMask;
+
     private void Start()
     {
         gameboard = GameObject.FindWithTag("Gameboard").GetComponent<Tilemap>();
         gameboard.CompressBounds();
         AddTiles();
-
-        PlayerDrag.OnPlaceTile += PlaceTileEventHandler;
     }
 
     /// <summary>
@@ -36,26 +38,36 @@ public class GameboardManager : MonoBehaviour
             }
         }
     }
+    private bool IsOnBoard(Vector3Int pos)
+    {
+        return gameboard.HasTile(pos);
+    }
 
-    public bool CanPlaceTile(Vector3 pos)
+    private bool CanPlaceTile(Vector3 pos)
     {
         Vector3Int cellPos = gameboard.WorldToCell(pos);
         if(IsOnBoard(cellPos))
         {
             if(!tileActive[cellPos])
             {
-                tileActive[cellPos] = true;
                 return true;
             }
             
         }
-
         return false;
     }
 
-    private bool IsOnBoard(Vector3Int pos)
+    public bool TryPlaceTile(Vector3 pos)
     {
-        return gameboard.HasTile(pos);
+        if(CanPlaceTile(pos))
+        {
+            PlaceTile(pos);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public Vector3 SnapToGrid(Vector3 pos)
@@ -63,8 +75,9 @@ public class GameboardManager : MonoBehaviour
         return gameboard.GetCellCenterWorld(gameboard.WorldToCell(pos));
     }
 
-    private void PlaceTileEventHandler(Vector3 pos)
+    private void PlaceTile(Vector3 pos)
     {
+        tileActive[gameboard.WorldToCell(pos)] = true;
         serchPoints.Add(gameboard.WorldToCell(pos));
         SearchPoints();
     }
@@ -74,14 +87,15 @@ public class GameboardManager : MonoBehaviour
         List<Vector3> removeList = new();
         foreach(Vector3 pos in serchPoints)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(pos.x, pos.y), SEARCHRADIUS);
-
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(pos.x, pos.y), SEARCHRADIUS, overlapMask);
             if(colliders.Length >= MINPOINTSTOSCORE)
             {
                 if(SymbolsMatch(colliders))
                 {
-                    Debug.Log("Score Point");
+                    //OnPointScore();
                     removeList.Add(pos);
+
+                    Debug.Log("point score");
                 }
             }   
         }

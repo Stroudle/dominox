@@ -8,7 +8,8 @@ public class PlayerDrag : MonoBehaviour
     private Vector3 startPos,dragStartMousePos, dragStartPos;
     private GameboardManager boardManager;
 
-    public static UnityAction<Vector3> OnPlaceTile;
+    public static UnityAction OnPlaceTile;
+    public static UnityAction<Vector3> OnDragStart;
 
     private void Awake()
     {
@@ -19,8 +20,12 @@ public class PlayerDrag : MonoBehaviour
     private void OnMouseDown()
     {
         isDrag = true;
+
         dragStartMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         dragStartPos = transform.position;
+        Destroy(GetComponent<BoxCollider2D>());
+
+        OnDragStart(dragStartPos);
     }
 
     //Update is faster than OnMouseDrag.
@@ -40,23 +45,24 @@ public class PlayerDrag : MonoBehaviour
     {
         isDrag = false;
 
-        if(boardManager.CanPlaceTile(transform.position))
+        if(boardManager.TryPlaceTile(transform.position))
         {
             PlaceTile();
         }
         else
         {
             transform.position = startPos;
+            gameObject.AddComponent<BoxCollider2D>();
         }
     }
 
     private void PlaceTile()
     {
         transform.position = boardManager.SnapToGrid(transform.position);
-        Destroy(GetComponent<BoxCollider2D>());
 
-        OnPlaceTile(transform.position);
+        OnPlaceTile();
 
+        Destroy(GetComponent<PlayerInput>());
         Destroy(this);
     }
 }

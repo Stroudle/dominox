@@ -9,7 +9,7 @@ public class ResourceManager : MonoBehaviour
     public GameboardManager boardManager { get; private set; }
 
     [SerializeField] private SO_Symbol diamond,circle,square,triangle;
-    [SerializeField] private GameObject symbol;
+    [SerializeField] private GameObject playerTile, tile;
 
     private void Awake()
     {
@@ -38,5 +38,15 @@ public class ResourceManager : MonoBehaviour
                 return triangle;
         }
         return null;
+    }
+
+    public GameObject GetPlayerTile()
+    {
+        return playerTile;
+    }
+
+    public GameObject GetTile()
+    {
+        return tile;
     }
 }
