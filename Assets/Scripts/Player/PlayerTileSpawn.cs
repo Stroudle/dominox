@@ -13,7 +13,7 @@ public class PlayerTileSpawn : MonoBehaviour
     private void Start()
     {
         PlayerDrag.OnDragStart += DragStartEventHandler;
-        PlayerDrag.OnPlaceTile += PlaceTileEventHandler;
+        PlayerDrag.OnPlayerPlaceTile += PlaceTileEventHandler;
     }
 
     private void DragStartEventHandler(Vector3 pos)

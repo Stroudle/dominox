@@ -10,7 +10,7 @@ public abstract class BaseGameMode : MonoBehaviour
     private void Start()
     {
         GameboardManager.OnPointScore += PointScoreEventHandler;
-        PlayerDrag.OnPlaceTile += PlaceTileEventHandler;
+        PlayerDrag.OnPlayerPlaceTile += PlaceTileEventHandler;
         GameboardManager.OnBoardFull += BoardFullEventHandler;
     }
 

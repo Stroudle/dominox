@@ -8,7 +8,7 @@ public class PlayerDrag : MonoBehaviour
     private Vector3 startPos,dragStartMousePos, dragStartPos;
     private GameboardManager boardManager;
 
-    public static UnityAction OnPlaceTile;
+    public static UnityAction OnPlayerPlaceTile;
     public static UnityAction<Vector3> OnDragStart;
 
     private void Awake()
@@ -60,7 +60,7 @@ public class PlayerDrag : MonoBehaviour
     {
         transform.position = boardManager.SnapToGrid(transform.position);
 
-        OnPlaceTile();
+        OnPlayerPlaceTile();
 
         Destroy(GetComponent<PlayerInput>());
         Destroy(this);
