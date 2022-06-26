@@ -2,19 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.Events;
-
+using System;
 
 public class GameboardManager : MonoBehaviour
 {
     public Tilemap gameboard { get; private set; }
 
-    private Dictionary<Vector3Int, bool> tileActive = new Dictionary<Vector3Int, bool>();
+    private Dictionary<Vector3Int, bool> tileFull = new Dictionary<Vector3Int, bool>();
     private List<Vector3> serchPoints = new List<Vector3>();
 
     private const float SEARCHRADIUS = 0.5f;
     private const int MINPOINTSTOSCORE = 4;
 
     public static UnityAction OnPointScore;
+    public static UnityAction OnBoardFull;
 
     [SerializeField] private LayerMask overlapMask;
 
@@ -34,7 +35,7 @@ public class GameboardManager : MonoBehaviour
         {
             if(gameboard.HasTile(pos))
             {
-                tileActive.Add(pos, false);
+                tileFull.Add(pos, false);
             }
         }
     }
@@ -48,7 +49,7 @@ public class GameboardManager : MonoBehaviour
         Vector3Int cellPos = gameboard.WorldToCell(pos);
         if(IsOnBoard(cellPos))
         {
-            if(!tileActive[cellPos])
+            if(!tileFull[cellPos])
             {
                 return true;
             }
@@ -77,7 +78,7 @@ public class GameboardManager : MonoBehaviour
 
     private void PlaceTile(Vector3 pos)
     {
-        tileActive[gameboard.WorldToCell(pos)] = true;
+        tileFull[gameboard.WorldToCell(pos)] = true;
         serchPoints.Add(gameboard.WorldToCell(pos));
         SearchPoints();
     }
@@ -98,6 +99,7 @@ public class GameboardManager : MonoBehaviour
             }   
         }
         serchPoints.RemoveAll(i => removeList.Contains(i));
+        VerifyBoadFull();
     }
 
     public bool SymbolsMatch(Collider2D[] colliders)
@@ -116,5 +118,16 @@ public class GameboardManager : MonoBehaviour
             }
         }
         return true;
+    }
+    private void VerifyBoadFull()
+    {
+        foreach(var i in tileFull)
+        {
+            if(!i.Value)
+            {
+                return;
+            }
+        }
+        OnBoardFull();
     }
 }

@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 389277474}
   - component: {fileID: 389277473}
   m_Layer: 5
-  m_Name: Player 2 Score
+  m_Name: Player 2 Final Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 938261628}
   - component: {fileID: 938261627}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Player final winner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1644,7 +1644,7 @@ GameObject:
   - component: {fileID: 1417254712}
   - component: {fileID: 1417254711}
   m_Layer: 5
-  m_Name: Vs Local Game End UI
+  m_Name: Vs Local End Game UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1810,7 +1810,7 @@ GameObject:
   - component: {fileID: 1608154838}
   - component: {fileID: 1608154837}
   m_Layer: 5
-  m_Name: Player 1 Score
+  m_Name: Player 1 Final Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2246,10 +2246,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cfaca5eac693946b34d1d4d41ad6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1turn: {fileID: 1337478174}
-  player1score: {fileID: 1642084616}
-  player2turn: {fileID: 2055244979}
-  player2score: {fileID: 1238293615}
+  EndGameUI: {fileID: 1417254709}
+  player1Turn: {fileID: 1337478174}
+  player1Score: {fileID: 1642084616}
+  player2Turn: {fileID: 2055244979}
+  player2Score: {fileID: 1238293615}
+  finalWinner: {fileID: 938261627}
+  player1FinalScore: {fileID: 1608154837}
+  player2FinalScore: {fileID: 389277473}
 --- !u!1 &2035902699
 GameObject:
   m_ObjectHideFlags: 0
