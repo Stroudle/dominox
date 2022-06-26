@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SingleplayerUIManager : BaseUIManager
+public class VsLocalUIManager : BaseUIManager
 {
     [SerializeField] private TextMeshProUGUI player1turn, player1score, player2turn, player2score;
 
@@ -14,7 +14,7 @@ public class SingleplayerUIManager : BaseUIManager
 
     protected override void PointScoreEventHandler(float value)
     {
-        if(SingleplayerGameMode.player1Turn)
+        if(VsLocalGameMode.player1Turn)
         {
             player1score.text = SCORE + value;
         }
@@ -26,7 +26,7 @@ public class SingleplayerUIManager : BaseUIManager
 
     protected override void TurnChangeEventHandler()
     {
-        if(SingleplayerGameMode.player1Turn)
+        if(VsLocalGameMode.player1Turn)
         {
             SetPlayer1Turn();
         }

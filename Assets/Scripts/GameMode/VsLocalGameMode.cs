@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SingleplayerGameMode : BaseGameMode
+public class VsLocalGameMode : BaseGameMode
 {
     public static bool player1Turn { get; private set; }
 

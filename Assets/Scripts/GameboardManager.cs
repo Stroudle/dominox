@@ -8,8 +8,8 @@ public class GameboardManager : MonoBehaviour
 {
     public Tilemap gameboard { get; private set; }
 
-    private Dictionary<Vector3Int, bool> tileActive = new();
-    private List<Vector3> serchPoints = new();
+    private Dictionary<Vector3Int, bool> tileActive = new Dictionary<Vector3Int, bool>();
+    private List<Vector3> serchPoints = new List<Vector3>();
 
     private const float SEARCHRADIUS = 0.5f;
     private const int MINPOINTSTOSCORE = 4;
@@ -84,7 +84,7 @@ public class GameboardManager : MonoBehaviour
 
     private void SearchPoints()
     {
-        List<Vector3> removeList = new();
+        List<Vector3> removeList = new List<Vector3>();
         foreach(Vector3 pos in serchPoints)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(pos.x, pos.y), SEARCHRADIUS, overlapMask);
