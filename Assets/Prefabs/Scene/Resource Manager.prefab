@@ -46,4 +46,4 @@ MonoBehaviour:
   circleOpen: {fileID: 11400000, guid: d312e9d4ac57d5e45ab35925a750b6cd, type: 2}
   circle: {fileID: 11400000, guid: 3049519b30fa3cc449c7211bf1541e89, type: 2}
   playerTile: {fileID: 2530110400283714919, guid: 8d4996da1f237a545833f9aca49628ef, type: 3}
-  tile: {fileID: 924945490283041505, guid: d2ac66e655f830a49829dc43449eec63, type: 3}
+  aiTile: {fileID: 5879742198434199368, guid: 7ed06e9edf487804b8f219b319ffe736, type: 3}

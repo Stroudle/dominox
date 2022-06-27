@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a0eff294f766a43b5229d4ff341823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minGridSize: {x: -6, y: -3}
   overlapMask:
     serializedVersion: 2
     m_Bits: 64

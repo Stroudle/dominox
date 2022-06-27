@@ -9,7 +9,7 @@ public class ResourceManager : MonoBehaviour
     public GameboardManager boardManager { get; private set; }
 
     [SerializeField] private SO_Symbol circleOpen, circle;
-    [SerializeField] private GameObject playerTile, tile;
+    [SerializeField] private GameObject playerTile, aiTile;
 
     private void Awake()
     {
@@ -41,8 +41,8 @@ public class ResourceManager : MonoBehaviour
         return playerTile;
     }
 
-    public GameObject GetTile()
+    public GameObject GetAITile()
     {
-        return tile;
+        return aiTile;
     }
 }
